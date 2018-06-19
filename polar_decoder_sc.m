@@ -1,4 +1,4 @@
-function [dec, dec_list] = polar_decoder(llr, K)
+function [dec, dec_list] = polar_decoder_sc(llr, K)
 
 N = length(llr);
 n = log2(N);
@@ -60,7 +60,7 @@ for i = 1:N
     end
    
      par_sum(i_0,1) = dec_list(i); 
-    dec = dec_list;
+    dec = dec_list(info_bit_idx+1);
 end
 
     
