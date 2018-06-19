@@ -15,11 +15,9 @@ for s = 1:n
     trellis(s,:) = idx(:)'+ repmat(1:2^(s-1),1,2^(n-s));
 end
 
-% SCL decoding
+% SC decoding
 for i = 1:N
-    % update LLR before decoding bit i
 
-       
         % forward calculation of partial sum
         for s = 1:n
             idx = trellis(n-s+1,:);
@@ -40,14 +38,15 @@ for i = 1:N
         end
         
     
-    % frozen bit
-     k =i-1;
+
+    k =i-1;
     k_rever = 0;
     for m = 0:n-1
      k_rever = bitor(k_rever,bitset(0,n-m,bitand(bitshift(1,m),k )));
     end
     i_0 = k_rever+1;
-        
+	
+    % frozen bit    
     if frozen_bit_flag(i)
         
         dec_list(i) = 0;
