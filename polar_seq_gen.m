@@ -15,7 +15,7 @@ end
 Q_Nmax = Q_Nmax_Gen;
 polar_seq_idx = Q_Nmax(Q_Nmax < N);
 info_bit_idx  = polar_seq_idx(end-K+1:end);
-info_bit_idx = sort(info_bit_idx);
+%info_bit_idx = sort(info_bit_idx);
 
 frozen_bit_flag = ones(1,N);
 frozen_bit_flag(info_bit_idx+1) = 0;
