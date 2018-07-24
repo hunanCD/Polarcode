@@ -78,7 +78,7 @@ i_0 = k_rever+1;
                 dec_list{listIdx}.PM = phi(dec_list{listIdx}.PM, dec_list{listIdx}.LLR(i_0,1), 0, 1);
             else % not update PM
             end
-            dec_list{listIdx}.par_sum(i,1) = 0;
+            dec_list{listIdx}.par_sum(i_0,1) = 0;
             fprintf('dec_list{listIdx}.PM=%d\n', dec_list{listIdx}.PM);
         end
     else
