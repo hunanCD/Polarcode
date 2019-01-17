@@ -2,7 +2,7 @@ function [dec, dec_list] = polar_decoder_scl(llr, K, L)
 
 N = length(llr);
 n = log2(N);
-[~, info_bit_idx, frozen_bit_flag] = polar_seq_gen(N, K);
+[dummy, info_bit_idx, frozen_bit_flag] = polar_seq_gen(N, K);
 
 % Initialization the decoding list
 list_size = 1;
@@ -25,7 +25,7 @@ end
 for i = 1:N
     % update LLR before decoding bit i
     for listIdx = 1:list_size
-        fprintf('1,listIdx=%d\n', listIdx);
+        %fprintf('1,listIdx=%d\n', listIdx);
         LLR = dec_list{listIdx}.LLR;
         par_sum = dec_list{listIdx}.par_sum;
         % forward calculation of partial sum
@@ -49,7 +49,7 @@ for i = 1:N
         end
         dec_list{listIdx}.LLR = LLR;
         dec_list{listIdx}.par_sum = par_sum;
-        fprintf('2,dec_list{listIdx}.LLR(2,1)=%d,listIdx=%d\n',dec_list{listIdx}.LLR(2,1), listIdx);
+        %fprintf('2,dec_list{listIdx}.LLR(2,1)=%d,listIdx=%d\n',dec_list{listIdx}.LLR(2,1), listIdx);
     end
     
     % update path metric and decoding list
@@ -79,7 +79,7 @@ i_0 = k_rever+1;
             else % not update PM
             end
             dec_list{listIdx}.par_sum(i_0,1) = 0;
-            fprintf('dec_list{listIdx}.PM=%d\n', dec_list{listIdx}.PM);
+            %fprintf('dec_list{listIdx}.PM=%d\n', dec_list{listIdx}.PM);
         end
     else
         % info bit
@@ -94,12 +94,12 @@ i_0 = k_rever+1;
             dec_list{listIdx+list_size}.PM = PM(listIdx+list_size);
         end
         if list_size >= L
-            fprintf('3,list_size=%d\n', list_size);
-            [~,sort_idx] = sort(PM);
+            %fprintf('3,list_size=%d\n', list_size);
+            [dummy,sort_idx] = sort(PM);
             dec_list = dec_list(sort_idx(1:L));
         else
             list_size = 2*list_size;
-            fprintf('3,list_size=%d\n', list_size);
+            %fprintf('3,list_size=%d\n', list_size);
         end
     end
 end
@@ -128,13 +128,13 @@ end
 
 function PM = phi(PM,LLR,u,dec_type)
 if dec_type == 0
-    fprintf('PMini=%d,LLR=%d,u=%d\n',PM,LLR,u);
+    %fprintf('PMini=%d,LLR=%d,u=%d\n',PM,LLR,u);
     if u ~= LLR
        PM = PM + log(1+exp(-(1-2*u)*LLR)); 
     else % PM = PM
     end
 else
-    fprintf('PMini=%d,LLR=%d,u=%d\n',PM,LLR,u);
+    %fprintf('PMini=%d,LLR=%d,u=%d\n',PM,LLR,u);
     PM = PM + ((1-2*u) ~= sign(LLR))*abs(LLR);
 end
 
