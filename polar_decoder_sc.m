@@ -2,7 +2,7 @@ function [dec, dec_list] = polar_decoder_sc(llr, K)
 
 N = length(llr);
 n = log2(N);
-[~, info_bit_idx, frozen_bit_flag] = polar_seq_gen(N, K);
+[dummy, info_bit_idx, frozen_bit_flag] = polar_seq_gen(N, K);
 
 dec_list = NaN(1,N);
 par_sum = NaN(N,log2(N)+1);
